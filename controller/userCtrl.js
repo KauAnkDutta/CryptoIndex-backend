@@ -129,7 +129,7 @@ const userCtrl = {
             if(verify){
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
-                    path: `/api/refreshToken`,
+                    path: `https://cryptoindex-backend.onrender.com/api/refreshToken`,
                     maxAge: 1 * 24 * 60 * 60 * 1000
                 })
 
@@ -202,7 +202,7 @@ const userCtrl = {
     refreshToken: (req, res) => {
         try {
             const Token = req.cookies;
-            console.log(req)
+            console.log("request object------->",req)
             // if(!Token){
             //     return res.status(400).json({msg: "Session expired, Login Again..."})
             // }
