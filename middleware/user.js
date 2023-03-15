@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-// const config = require('../db/mongo');
 const dotenv = require("dotenv").config();
 
 const userMiddleware = async(req, res, next) => {
