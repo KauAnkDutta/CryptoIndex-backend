@@ -14,7 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000/", "my-cyclic-domain"], credentials: true, }));
+app.set("trust proxy", 1);
 app.use(cookieParser());
 
 app.use(helmet());
@@ -29,7 +30,7 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true}, (err) => {
 app.use(`/api`, require('./routes/userRoutes'))
 app.use(`/api`, require('./routes/coinRoutes'))
 
-app.use(`/api`, createProxyMiddleware({target: "http://localhost:4000", changeOrigin: true}));
+// app.use(`/api`, createProxyMiddleware({target: "http://localhost:4000", changeOrigin: true}));
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is up and running at htth:localhost:${process.env.PORT}`)
