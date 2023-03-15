@@ -130,9 +130,6 @@ const userCtrl = {
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
                     maxAge: 1 * 24 * 60 * 60 * 1000,
-                    secure: true, 
-                    sameSite: 'none',
-                    domain: "http://localhost:3000/"
                 })
 
                 res.status(200).json({
