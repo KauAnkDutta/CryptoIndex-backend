@@ -130,7 +130,6 @@ const userCtrl = {
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
                     maxAge: 1 * 24 * 60 * 60 * 1000,
-                    secure: true, 
                 })
 
                 res.status(200).json({
@@ -177,7 +176,7 @@ const userCtrl = {
 
     logout: async(req, res) => {
         try {
-            res.clearCookie("refreshToken", {path: `/api/refreshToken`})
+            res.clearCookie("refreshToken")
 
             res.status(200).json({msg: "Logout Successfull"})
         } catch (error) {
