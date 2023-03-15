@@ -130,7 +130,8 @@ const userCtrl = {
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
                     path: `https://cryptoindex-backend.onrender.com/api/refreshToken`,
-                    maxAge: 1 * 24 * 60 * 60 * 1000
+                    maxAge: 1 * 24 * 60 * 60 * 1000,
+                    secure: true,
                 })
 
                 res.status(200).json({
