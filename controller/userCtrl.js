@@ -201,7 +201,7 @@ const userCtrl = {
 
     refreshToken: (req, res) => {
         try {
-            const Token = req.cookies.refreshToken;
+            const Token = req.cookies;
             console.log(Token)
             // if(!Token){
             //     return res.status(400).json({msg: "Session expired, Login Again..."})
