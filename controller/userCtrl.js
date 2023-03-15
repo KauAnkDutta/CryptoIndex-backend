@@ -202,17 +202,18 @@ const userCtrl = {
     refreshToken: (req, res) => {
         try {
             const Token = req.cookies.refreshToken;
-            if(!Token){
-                return res.status(400).json({msg: "Session expired, Login Again..."})
-            }
-            jwt.verify(Token, process.env.REFRESHTOKENSECRET, (err, user) => {
-                if(err){
-                    return res.status(400).json({msg: "Session Expired, Login Again..."})
-                }
+            console.log(Token)
+            // if(!Token){
+            //     return res.status(400).json({msg: "Session expired, Login Again..."})
+            // }
+            // jwt.verify(Token, process.env.REFRESHTOKENSECRET, (err, user) => {
+            //     if(err){
+            //         return res.status(400).json({msg: "Session Expired, Login Again..."})
+            //     }
 
-                const accessToken = createAccessToken({id: user.id})
-                res.status(200).json({token: accessToken})
-            })
+            //     const accessToken = createAccessToken({id: user.id})
+            //     res.status(200).json({token: accessToken})
+            // })
         } catch (error) {
             res.status(500).json({msg: 'Requested can not be completed.'}) 
         }
