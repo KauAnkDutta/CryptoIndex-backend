@@ -156,7 +156,7 @@ const userCtrl = {
                 var mailOptions = {
                     from: process.env.USER,
                     to: email,
-                    subject: 'App Testing',
+                    subject: "App Testing",
                     text: `${otp}`
                 }
 
