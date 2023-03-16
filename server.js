@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors({
-  origin: 'https://cryptoindex-frontend.onrender.com/',
+  origin: 'https://cryptoindex-frontend.onrender.com',
   credentials: true
 }));
 
