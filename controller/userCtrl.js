@@ -1,7 +1,6 @@
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-// const config = require('../db/mongo');
 const dotenv = require("dotenv").config();
 const {createAccessToken, createRefereshToken} = require('../middleware/util');
 const nodemailer = require('nodemailer');

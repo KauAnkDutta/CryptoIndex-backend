@@ -14,8 +14,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         trim: true,
-    },  
-    
+    }, 
 },{
     timestamps: true,
     collection: "usersecret"
