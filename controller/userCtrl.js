@@ -133,7 +133,8 @@ const userCtrl = {
 
         const accessToken = createAccessToken({id: extUser._id})
 
-        const refreshToken = createRefereshToken({id: extUser._id})
+        // const refreshToken = createRefereshToken({id: extUser._id})
+        const rtoken = req.cookies.refreshToken;
 
         try {
             const verify = verifyOTP(token)
@@ -142,6 +143,7 @@ const userCtrl = {
                 res.status(200).json({
                     verify: verify,
                     accessToken: accessToken,
+                    rtoken: rtoken,
                 });
             }else{
                 res.status(500).json({msg:"failed to verify"});
