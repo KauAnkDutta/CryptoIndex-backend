@@ -86,7 +86,18 @@ const userCtrl = {
                 return res.status(400).json({msg: "Password doesn't match"})
             }
 
+            const refreshToken = createRefereshToken({id: extUser._id})
+
             if(Token){
+                // ---------------
+                res.cookie('r-token', refreshToken, {
+                    httpOnly: true,
+                    maxAge: 86400000, // 1 day in milliseconds
+                    secure: true, // Set this to true if your website is hosted on HTTPS
+                    sameSite: 'none' // Set this to 'none' if you want to allow cross-site cookies
+                  });
+                // ---------------
+                
                 var mailOptions = {
                     from: process.env.USER,
                     to: email,
