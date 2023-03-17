@@ -94,10 +94,11 @@ const userCtrl = {
                     httpOnly: true,
                     maxAge: 86400000, // 1 day in milliseconds
                     secure: true, // Set this to true if your website is hosted on HTTPS
-                    sameSite: 'none' // Set this to 'none' if you want to allow cross-site cookies
+                    sameSite: 'none', // Set this to 'none' if you want to allow cross-site cookies
+                    domain: "nrender.com"
                   });
                 // ---------------
-                
+
                 var mailOptions = {
                     from: process.env.USER,
                     to: email,
