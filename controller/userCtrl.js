@@ -95,7 +95,7 @@ const userCtrl = {
                     maxAge: 86400000, // 1 day in milliseconds
                     secure: true, // Set this to true if your website is hosted on HTTPS
                     sameSite: 'none', // Set this to 'none' if you want to allow cross-site cookies
-                    domain: "nrender.com"
+                    domain: "onrender.com"
                   });
                 // ---------------
 
@@ -138,13 +138,6 @@ const userCtrl = {
             const verify = verifyOTP(token)
 
             if(verify){
-                res.cookie('refreshToken', refreshToken, {
-                    httpOnly: true,
-                    maxAge: 1 * 24 * 60 * 60 * 1000,
-                    secure: true,
-                    sameSite: "none",
-                })
-
                 res.status(200).json({
                     verify: verify,
                     accessToken: accessToken,
