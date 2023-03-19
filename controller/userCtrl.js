@@ -1,8 +1,6 @@
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv").config();
-const {createAccessToken, createRefereshToken} = require('../middleware/util');
+const {createAccessToken} = require('../middleware/util');
 const nodemailer = require('nodemailer');
 
 
@@ -86,18 +84,18 @@ const userCtrl = {
                 return res.status(400).json({msg: "Password doesn't match"})
             }
 
-            const refreshToken = createRefereshToken({id: extUser._id})
+            // const refreshToken = createRefereshToken({id: extUser._id})
 
             if(Token){
                 // ---------------
-                res.cookie('r-token', refreshToken, {
-                    httpOnly: true,
-                    maxAge: 86400000, // 1 day in milliseconds
-                    secure: true, // Set this to true if your website is hosted on HTTPS
-                    sameSite: 'none', // Set this to 'none' if you want to allow cross-site cookies
-                    domain: "cryptoindex-backend.onrender.com",
-                    path: '/'
-                  });
+                // res.cookie('r-token', refreshToken, {
+                //     httpOnly: true,
+                //     maxAge: 86400000, // 1 day in milliseconds
+                //     secure: true, // Set this to true if your website is hosted on HTTPS
+                //     sameSite: 'none', // Set this to 'none' if you want to allow cross-site cookies
+                //     domain: "cryptoindex-backend.onrender.com",
+                //     path: '/'
+                //   });
                 // ---------------
 
                 var mailOptions = {
@@ -131,19 +129,15 @@ const userCtrl = {
 
         const  extUser = await User.findOne({email})
 
-        const accessToken = createAccessToken({id: extUser._id})
-
-        // const refreshToken = createRefereshToken({id: extUser._id})
-        const rtoken = req.cookies.refreshToken;
-
         try {
             const verify = verifyOTP(token)
 
             if(verify){
+                const accessToken = createAccessToken({id: extUser._id})
+
                 res.status(200).json({
                     verify: verify,
                     accessToken: accessToken,
-                    rtoken: rtoken,
                 });
             }else{
                 res.status(500).json({msg:"failed to verify"});
@@ -183,15 +177,15 @@ const userCtrl = {
         }
     },
 
-    logout: async(req, res) => {
-        try {
-            res.clearCookie("refreshToken")
+    // logout: async(req, res) => {
+    //     try {
+    //         res.clearCookie("refreshToken")
 
-            res.status(200).json({msg: "Logout Successfull"})
-        } catch (error) {
-            res.status(500).json({msg: 'Requested can not be completed.'}) 
-        }
-    },
+    //         res.status(200).json({msg: "Logout Successfull"})
+    //     } catch (error) {
+    //         res.status(500).json({msg: 'Requested can not be completed.'}) 
+    //     }
+    // },
 
     getUser: async(req, res) => {
         let id = req.user.id
@@ -207,25 +201,6 @@ const userCtrl = {
         }
     },
 
-    refreshToken: (req, res) => {
-        try {
-            const Token = req.cookies.refreshToken;
-            // console.log("request----------->",req)
-            if(!Token){
-                return res.status(400).json({msg: "Session expired, Login Again..."})
-            }
-            jwt.verify(Token, process.env.REFRESHTOKENSECRET, (err, user) => {
-                if(err){
-                    return res.status(400).json({msg: "Session Expired, Login Again..."})
-                }
-
-                const accessToken = createAccessToken({id: user.id})
-                res.status(200).json({token: accessToken})
-            })
-        } catch (error) {
-            res.status(500).json({msg: 'Requested can not be completed.'}) 
-        }
-    },
 }
 
 module.exports = userCtrl
