@@ -95,7 +95,7 @@ const userCtrl = {
                     maxAge: 86400000, // 1 day in milliseconds
                     secure: true, // Set this to true if your website is hosted on HTTPS
                     sameSite: 'none', // Set this to 'none' if you want to allow cross-site cookies
-                    domain: "helpful-dodol-3e6fb2.netlify.app",
+                    domain: "cryptoindex-frontend.onrender.com",
                     path: '/'
                   });
                 // ---------------
