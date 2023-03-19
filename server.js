@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors({
-  origin: 'https://cryptoindex-frontend.onrender.com',
+  origin: 'https://helpful-dodol-3e6fb2.netlify.app',
   credentials: true
 }));
 
