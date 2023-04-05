@@ -2,6 +2,8 @@ const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
 const {createAccessToken} = require('../middleware/util');
 const nodemailer = require('nodemailer');
+const dotenv = require("dotenv").config();
+const mongoose = require('mongoose');
 
 
 var transporter = nodemailer.createTransport({
@@ -67,6 +69,18 @@ const userCtrl = {
             res.status(500).json({msg: 'Requested can not be completed.'}) 
         }
     },
+    
+    connect: async(req, res) => { 
+        try {
+            await mongoose.connect(process.env.MONGO_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            res.status(200).json('Connected to database successfully');
+        } catch (error) {
+            res.status(500).json('Error connecting to database');
+        }
+    }, 
 
     login: async(req, res) => {
         try {
